@@ -5,18 +5,26 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.preference.PreferenceFragmentCompat;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import de.danoeh.antennapod.BuildConfig;
 import de.danoeh.antennapod.R;
 import de.danoeh.antennapod.activity.PreferenceActivity;
 import de.danoeh.antennapod.core.util.IntentUtils;
+import de.danoeh.antennapod.core.util.TransApi;
+import de.danoeh.antennapod.preferences.TeaserPreference;
 
 public class AboutFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences_about);
+
+        TeaserPreference imagePreference = findPreference("about_teaser");
+        imagePreference.setImageUrl(TransApi.APP_USER_GROUP_URL + "?usage=about&r=" + (long) System.currentTimeMillis()/1000);
 
         findPreference("about_version").setSummary(String.format(
                 "%s (%s)", BuildConfig.VERSION_NAME, BuildConfig.COMMIT_HASH));

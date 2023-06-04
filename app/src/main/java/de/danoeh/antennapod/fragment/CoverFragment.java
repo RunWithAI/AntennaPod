@@ -71,6 +71,8 @@ public class CoverFragment extends Fragment {
         viewBinding.imgvCover.setOnClickListener(v -> onPlayPause());
         viewBinding.openDescription.setOnClickListener(view -> ((AudioPlayerFragment) requireParentFragment())
                 .scrollToPage(AudioPlayerFragment.POS_DESCRIPTION, true));
+        viewBinding.showTranscript.setOnClickListener(view -> ((AudioPlayerFragment) requireParentFragment())
+                .scrollToPage(AudioPlayerFragment.POS_TRANSCRIPTION, true));
         ColorFilter colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
                 viewBinding.txtvPodcastTitle.getCurrentTextColor(), BlendModeCompat.SRC_IN);
         viewBinding.butNextChapter.setColorFilter(colorFilter);

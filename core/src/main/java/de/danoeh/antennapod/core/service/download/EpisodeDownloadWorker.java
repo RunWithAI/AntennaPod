@@ -1,5 +1,6 @@
 package de.danoeh.antennapod.core.service.download;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,8 +10,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Data;
+import androidx.work.ForegroundInfo;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+import androidx.work.impl.utils.futures.SettableFuture;
+
+import com.google.common.util.concurrent.ListenableFuture;
+
 import de.danoeh.antennapod.core.ClientConfigurator;
 import de.danoeh.antennapod.core.R;
 import de.danoeh.antennapod.core.service.download.handler.MediaDownloadedHandler;
@@ -47,6 +53,9 @@ public class EpisodeDownloadWorker extends Worker {
     @Override
     @NonNull
     public Result doWork() {
+
+        Log.d(TAG, "doWork invoked here");
+
         ClientConfigurator.initialize(getApplicationContext());
         long mediaId = getInputData().getLong(DownloadServiceInterface.WORK_DATA_MEDIA_ID, 0);
         FeedMedia media = DBReader.getFeedMedia(mediaId);
@@ -261,5 +270,25 @@ public class EpisodeDownloadWorker extends Worker {
         NotificationManager nm = (NotificationManager) getApplicationContext()
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(R.id.notification_downloading, builder.build());
+    }
+
+    @SuppressLint("RestrictedApi")
+    @NonNull
+    @Override
+    public ListenableFuture<ForegroundInfo> getForegroundInfoAsync() {
+        String notificationTitle = "Your notification title";
+        String notificationText = "Your notification text";
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), NotificationUtils.CHANNEL_ID_DOWNLOADING)
+                .setContentTitle(notificationTitle)
+                .setContentText(notificationText)
+                .setSmallIcon(R.drawable.ic_notification_sync)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        ForegroundInfo foregroundInfo = new ForegroundInfo(R.id.notification_downloading, builder.build());
+        @SuppressLint("RestrictedApi") SettableFuture<ForegroundInfo> future = SettableFuture.create();
+        future.set(foregroundInfo);
+
+        return future;
     }
 }

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/transcript_nav_transcript"
+        android:icon="@drawable/ic_transcript_nav_transcript"
+        android:title="@string/transcript_nav_transcript" />
+    <item
+        android:id="@+id/transcript_nav_bookmarks"
+        android:icon="@drawable/ic_transcript_nav_bookmarks"
+        android:title="@string/transcript_nav_bookmarks" />
+    <item
+        android:id="@+id/transcript_nav_notes"
+        android:icon="@drawable/ic_transcript_nav_notes"
+        android:title="@string/transcript_nav_notes" />
+</menu>

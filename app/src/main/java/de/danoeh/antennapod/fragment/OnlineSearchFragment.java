@@ -101,6 +101,10 @@ public class OnlineSearchFragment extends Fragment {
         //Show information about the podcast when the list item is clicked
         gridView.setOnItemClickListener((parent, view1, position, id) -> {
             PodcastSearchResult podcast = searchResults.get(position);
+
+            Log.d(TAG, "clicked podcast with author " + podcast.author + " title " + podcast.title +
+                    " feedUrl " + podcast.feedUrl + " image " + podcast.imageUrl);
+
             Intent intent = new Intent(getActivity(), OnlineFeedViewActivity.class);
             intent.putExtra(OnlineFeedViewActivity.ARG_FEEDURL, podcast.feedUrl);
             intent.putExtra(MainActivity.EXTRA_STARTED_FROM_SEARCH, true);

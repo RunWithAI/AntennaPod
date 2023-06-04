@@ -39,9 +39,9 @@ public class AllowNotificationsSection extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewBinding = HomeSectionNotificationBinding.inflate(inflater);
         viewBinding.allowButton.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
-            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+//            }
         });
         viewBinding.openSettingsButton.setOnClickListener(view -> {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);

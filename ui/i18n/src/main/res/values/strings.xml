@@ -829,4 +829,76 @@
     <string name="shortcut_subscription_label">Subscription shortcut</string>
     <string name="shortcut_select_subscription">Select subscription</string>
     <string name="add_shortcut">Add Shortcut</string>
+
+    <!-- Transcript related -->
+
+
+    <string name="transcript_fetch_action_query">Transcript query: </string>
+    <string name="transcript_fetch_action_download">Transcript query:</string>
+    <string name="transcript_fetch_action_transcribe">Transcript query: </string>
+
+    <string name="transcript_fetch_next_action_query">query again</string>
+    <string name="transcript_fetch_next_action_download">start download</string>
+    <string name="transcript_fetch_next_action_transcribe">transcribe</string>
+
+    <string name="transcript_fetch_seconds_later">seconds later,</string>
+
+
+    <string name="transcript_fetch_audio_download_ready">ready to download </string>
+    <string name="transcript_fetch_audio_download_failed">failed to download </string>
+    <string name="transcript_fetch_audio_download_progress">download progress </string>
+
+    <string name="transcript_fetch_transcribe_ongoing">transcribing</string>
+    <string name="transcript_fetch_transcribe_ready">ready to transcribe</string>
+    <string name="transcript_fetch_transcribe_audio_missing">audio file missing</string>
+    <string name="transcript_fetch_transcribe_audio_downloaded">audio file downloaded</string>
+    <string name="transcript_fetch_transcribe_audio_downloading">audio file downloading</string>
+    <string name="transcript_fetch_transcribe_busy">transcribe queue full</string>
+    <string name="transcript_fetch_transcribe_failed">failed to transcribe</string>
+    <string name="transcript_fetch_server_error">server unreachable</string>
+
+
+    <string name="transcript_show_transcript">Automated Transcription &gt;&gt;</string>
+    <string name="transcript_nav_transcript">Transcript</string>
+    <string name="transcript_nav_bookmarks">Bookmarks</string>
+    <string name="transcript_nav_notes">Notes</string>
+    <string name="transcript_bookmark_tip">Click below bookmark button to mark the position you would rehear later</string>
+    <string name="transcript_trans_translate">TRANS</string>
+    <string name="transcript_trans_tts">TTS</string>
+    <string name="transcript_trans_title">Translation</string>
+    <string name="transcript_trans_add_note">Add to notes</string>
+    <string name="transcript_trans_got_it">Got It</string>
+    <string name="transcript_word_mastered">Delete It</string>
+    <string name="transcript_word_review_later">Review Later</string>
+    <string name="transcript_word_delete_or_review_confirm">If you have already mastered this new word, you can remove it from the vocabulary list.</string>
+
+    <string name="transcript_word_review_just_now">just now</string>
+    <string name="transcript_word_review_minutes_ago">minutes ago</string>
+    <string name="transcript_word_review_hours_ago">hours ago</string>
+    <string name="transcript_word_review_days_ago">days ago</string>
+    <string name="transcript_word_review_weeks_ago">weeks ago</string>
+    <string name="transcript_word_review_months_ago">months ago</string>
+    <string name="transcript_word_review_years_ago">years ago</string>
+    <string name="transcript_about_choose_an_app">Choose an App</string>
+    <string name="transcript_about_group_invite">
+    "To join the discussion group for this app, please follow these steps: \n
+    1. Long press on the QR code displayed below.\n
+    2. Open the selected QR code image with WeChat.\n
+    3. Send the image to \'FileTransferHelper\'.\n
+    4. Click the image that appears in the \'FileTransferHelper\' dialog window.\n
+    5. Long press the image in the dialog window to join the discussion group."
+    </string>
+
+    <string name="transcript_about_source_project_url">AntennaPod source: https://github.com/AntennaPod/AntennaPod</string>
+    <string name="transcript_about_project_url">This project source: https://github.com/RunWithAI/AntennaPod</string>
+
+    <string name="transcript_update_app_title">Version update</string>
+    <string name="transcript_update_app_yes">Update</string>
+    <string name="transcript_update_app_no">Ignore</string>
+    <string name="transcript_update_app_cancel">Cancel</string>
+    <string name="transcript_update_app_later">Not now</string>
+
+    <string name="english_learning_recommendation">English Learning</string>
+    <string name="app_label">PodTrans</string>
+
 </resources>

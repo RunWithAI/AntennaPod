@@ -25,3 +25,5 @@ include ':ui:glide'
 include ':ui:i18n'
 include ':ui:png-icons'
 include ':ui:statistics'
+
+include ':flagchatadapter'

@@ -33,6 +33,12 @@
             android:summary="@string/synchronization_sum"
             android:icon="@drawable/ic_cloud" />
 
+<!--    <Preference-->
+<!--        android:key="prefTranscribe"-->
+<!--        android:title = "对白解析"-->
+<!--        android:summary="对白解析服务参数设置"-->
+<!--        android:icon="@drawable/ic_cloud" />-->
+
     <Preference
             android:key="prefScreenImportExport"
             android:title="@string/import_export_pref"
@@ -47,6 +53,10 @@
     <PreferenceCategory
             android:key="project"
             android:title="@string/project_pref">
+        <Preference
+            android:key="prefAbout"
+            android:title="@string/about_pref"
+            android:icon="@drawable/ic_info" />
         <Preference
             android:key="prefDocumentation"
             android:title="@string/documentation_support"
@@ -63,9 +73,6 @@
             android:key="prefSendBugReport"
             android:title="@string/bug_report_title"
             android:icon="@drawable/ic_bug" />
-        <Preference
-            android:key="prefAbout"
-            android:title="@string/about_pref"
-            android:icon="@drawable/ic_info" />
+
     </PreferenceCategory>
 </PreferenceScreen>

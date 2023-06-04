@@ -6,12 +6,20 @@ apply from: "../common.gradle"
 apply from: "../playFlavor.gradle"
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_15
+        targetCompatibility JavaVersion.VERSION_15
+    }
+
+
     defaultConfig {
         // Version code schema:
         // "1.2.3-beta4"    -> 1020304
         // "1.2.3"          -> 1020395
-        versionCode 3000295
-        versionName "3.0.2"
+        versionCode 3000297
+        versionName "3.0.301"
+        applicationId "com.kejikeji.podcast"
 
         def commit = ""
         try {
@@ -46,10 +54,12 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
-            resValue "string", "provider_authority", "de.danoeh.antennapod.debug.provider"
+            resValue "string", "provider_authority", "com.kejikeji.podcast.debug.provider"
+            resValue "string", "transcript_about_choose_an_app", "Choose an App"
         }
         release {
-            resValue "string", "provider_authority", "de.danoeh.antennapod.provider"
+            resValue "string", "provider_authority", "com.kejikeji.podcast.provider"
+            resValue "string", "transcript_about_choose_an_app", "Choose an App "
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.releaseConfig
@@ -91,6 +101,8 @@ dependencies {
     implementation project(':ui:i18n')
     implementation project(':ui:statistics')
 
+    implementation project(path: ':flagchatadapter')
+
     annotationProcessor "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
@@ -105,6 +117,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
     implementation "androidx.work:work-runtime:$workManagerVersion"
     implementation "com.google.android.material:material:$googleMaterialVersion"
+
 
     implementation "org.apache.commons:commons-lang3:$commonslangVersion"
     implementation "commons-io:commons-io:$commonsioVersion"

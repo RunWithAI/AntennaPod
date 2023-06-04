@@ -49,8 +49,8 @@
   <string name="home_continue_title">继续收听</string>
   <string name="home_new_title">最近更新</string>
   <string name="home_downloads_title">管理下载</string>
-  <string name="home_welcome_title">欢迎来到 AntennaPod！</string>
-  <string name="home_welcome_text">你尚未订阅任何播客。 打开侧栏菜单添加一个。</string>
+  <string name="home_welcome_title">欢迎来到字幕播客！</string>
+  <string name="home_welcome_text">"你尚未订阅任何播客。 侧栏菜单->订阅->添加。\n欢迎加入讨论群，侧栏菜单->设置->关于。"</string>
   <string name="configure_home">配置主屏幕</string>
   <!--Download Statistics fragment-->
   <string name="total_size_downloaded_podcasts">设备上音频节目的总大小</string>
@@ -113,6 +113,8 @@
   <string name="feed_auto_download_global">全局默认</string>
   <string name="feed_auto_download_always"> 总是</string>
   <string name="feed_auto_download_never">从不</string>
+    <string name="feed_new_episodes_action_add_to_inbox">加入收件箱</string>
+    <string name="feed_new_episodes_action_nothing">忽略</string>
   <string name="send_label">发送</string>
   <string name="episode_cleanup_never">从不</string>
   <string name="episode_cleanup_except_favorite_removal">当未收藏时</string>
@@ -367,6 +369,8 @@
   <string name="pref_favorite_keeps_episodes_title">保留收藏的剧集</string>
   <string name="playback_pref">播放</string>
   <string name="playback_pref_sum">耳机控制、跳过间隔、排队</string>
+    <string name="downloads_pref">下载</string>
+    <string name="downloads_pref_sum">更新间隔,移动数据,自动下载,自动删除</string>
   <string name="network_pref">网络</string>
   <string name="network_pref_sum">更新间隔、下载控件、移动数据</string>
   <string name="feed_refresh_title">刷新播客</string>
@@ -492,6 +496,10 @@
   <string name="pref_contribute">贡献</string>
   <string name="pref_show_subscription_title">显示订阅标题</string>
   <string name="pref_show_subscription_title_summary">在封面图下方显示订阅标题</string>
+
+    <string name="pref_new_episodes_action_title">播客更新操作</string>
+    <string name="pref_new_episodes_action_sum">发现播客有新的更新时的操作</string>
+
   <!--About screen-->
   <string name="about_pref">关于</string>
   <string name="antennapod_version">AntennaPod版本</string>
@@ -778,4 +786,71 @@
   <string name="shortcut_subscription_label">订阅快捷方式</string>
   <string name="shortcut_select_subscription">选择订阅</string>
   <string name="add_shortcut">添加快捷方式</string>
+
+
+    <!-- Transcript related -->
+
+
+    <string name="transcript_fetch_action_query">字幕查询：</string>
+    <string name="transcript_fetch_action_download">字幕查询: </string>
+    <string name="transcript_fetch_action_transcribe">字幕查询: </string>
+
+    <string name="transcript_fetch_next_action_query">继续查询</string>
+    <string name="transcript_fetch_next_action_download">开始下载</string>
+    <string name="transcript_fetch_next_action_transcribe">解析</string>
+
+    <string name="transcript_fetch_seconds_later">秒后,</string>
+
+
+    <string name="transcript_fetch_audio_download_ready">即将下载</string>
+    <string name="transcript_fetch_audio_download_failed">下载失败</string>
+    <string name="transcript_fetch_audio_download_progress">下载进度</string>
+
+    <string name="transcript_fetch_transcribe_ongoing">解析中</string>
+    <string name="transcript_fetch_transcribe_ready">即将解析</string>
+    <string name="transcript_fetch_transcribe_audio_missing">语音文件不存在</string>
+    <string name="transcript_fetch_transcribe_audio_downloaded">语音文件下载完成</string>
+    <string name="transcript_fetch_transcribe_audio_downloading">语音文件下载中</string>
+    <string name="transcript_fetch_transcribe_busy">解析服务忙</string>
+    <string name="transcript_fetch_transcribe_failed">解析失败</string>
+    <string name="transcript_fetch_server_error">后台服务无法访问</string>
+
+    <string name="transcript_show_transcript">自动生成字幕 &gt;&gt;</string>
+    <string name="transcript_nav_transcript">播客字幕</string>
+    <string name="transcript_nav_bookmarks">重听段落</string>
+    <string name="transcript_nav_notes">生词记录</string>
+    <string name="transcript_bookmark_tip">您可以点击下方的书签按钮以标注后续重听位置</string>
+    <string name="transcript_trans_translate">翻译</string>
+    <string name="transcript_trans_tts">发音</string>
+    <string name="transcript_trans_title">句子翻译</string>
+    <string name="transcript_trans_add_note">收入生词本</string>
+    <string name="transcript_trans_got_it">明白了</string>
+    <string name="transcript_word_mastered">已牢记,删</string>
+    <string name="transcript_word_review_later">没记住,再看</string>
+    <string name="transcript_word_delete_or_review_confirm">如果您已经掌握该生词，可将其从生词表中删除。</string>
+    <string name="transcript_word_review_just_now">刚刚</string>
+    <string name="transcript_word_review_minutes_ago">分钟前</string>
+    <string name="transcript_word_review_hours_ago">小时前</string>
+    <string name="transcript_word_review_days_ago">天前</string>
+    <string name="transcript_word_review_weeks_ago">个星期前</string>
+    <string name="transcript_word_review_months_ago">个月前</string>
+    <string name="transcript_word_review_years_ago">年前</string>
+    <string name="transcript_about_choose_an_app">选择应用</string>
+    <string name="transcript_about_group_invite">
+    "字幕播客基于开源项目AntennaPod制作，欢迎加入字幕播客的讨论群，请按如下步骤操作: \n
+    1. 长按下方的二维码,选择用微信打开.2. 将二维码发送给文件传输助手,在文件传输助手聊天窗口中点击打开二维码.3. 长按识别二维码加入讨论群组."
+    </string>
+    <string name="transcript_about_source_project_url">AntennaPod源码: https://github.com/AntennaPod/AntennaPod</string>
+    <string name="transcript_about_project_url">字幕播客源码: https://github.com/RunWithAI/AntennaPod</string>
+
+    <string name="transcript_update_app_title">版本更新</string>
+    <string name="transcript_update_app_yes">下载更新</string>
+    <string name="transcript_update_app_no">跳过该次更新</string>
+    <string name="transcript_update_app_cancel">取消更新</string>
+    <string name="transcript_update_app_later">稍后更新</string>
+
+    <string name="english_learning_recommendation">语言学习</string>
+    <string name="app_label">字幕播客</string>
+
+
 </resources>

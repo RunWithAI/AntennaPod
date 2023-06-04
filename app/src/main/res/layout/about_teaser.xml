@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:adjustViewBounds="true"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/teaser"
-        android:importantForAccessibility="no"/>
+        android:id="@+id/transcript_about_group_invite_divider_top"
+        android:layout_marginVertical="4dp" />
+
+    <TextView
+        android:layout_below="@id/transcript_about_group_invite_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:text="@string/transcript_about_group_invite"
+        android:id="@+id/transcript_about_group_invite_desc"
+        android:textAlignment="textStart"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/transcript_about_group_invite_desc"
+        android:id="@+id/transcript_about_group_invite_qrcode"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/image_teaser"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_below="@id/transcript_about_group_invite_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:autoLink="web"
+        android:text="@string/transcript_about_project_url"
+        android:id="@+id/transcript_about_project_url"/>
+
+    <TextView
+        android:layout_below="@id/transcript_about_project_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:autoLink="web"
+        android:text="@string/transcript_about_source_project_url"
+        android:id="@+id/transcript_about_source_project_url"/>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_below="@id/transcript_about_source_project_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp" />
+
+</RelativeLayout>
+

@@ -70,8 +70,22 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textIsSelectable="false"
             android:textSize="@dimen/text_size_small"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="10dp"
             tools:text="Episode" />
+
+         <TextView
+            android:id="@+id/showTranscript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:gravity="center_horizontal"
+            android:maxLines="2"
+            android:text="@string/transcript_show_transcript"
+            android:textColor="?android:attr/textColorLink"
+             android:layout_marginBottom="32dp"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -121,6 +135,11 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+
+
+
+
+
 
         <LinearLayout
             android:id="@+id/chapterButton"

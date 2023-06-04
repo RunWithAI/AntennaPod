@@ -1,14 +1,22 @@
 package de.danoeh.antennapod.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -26,13 +34,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.elevation.SurfaceColors;
 
 import de.danoeh.antennapod.core.receiver.MediaButtonReceiver;
+import de.danoeh.antennapod.core.service.download.handler.TranscriptionHelper;
 import de.danoeh.antennapod.core.util.playback.PlaybackController;
 import de.danoeh.antennapod.dialog.MediaPlayerErrorDialog;
+import de.danoeh.antennapod.event.MarkFragment2ReviewEvent;
 import de.danoeh.antennapod.event.playback.BufferUpdateEvent;
 import de.danoeh.antennapod.event.playback.PlaybackServiceEvent;
 import de.danoeh.antennapod.event.PlayerErrorEvent;
 import de.danoeh.antennapod.event.playback.SleepTimerUpdatedEvent;
 import de.danoeh.antennapod.event.playback.SpeedChangedEvent;
+import de.danoeh.antennapod.playback.base.PlayerStatus;
 import de.danoeh.antennapod.playback.cast.CastEnabledActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,6 +51,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashSet;
 import java.util.List;
 
 import de.danoeh.antennapod.R;
@@ -77,7 +89,9 @@ public class AudioPlayerFragment extends Fragment implements
     public static final String TAG = "AudioPlayerFragment";
     public static final int POS_COVER = 0;
     public static final int POS_DESCRIPTION = 1;
-    private static final int NUM_CONTENT_FRAGMENTS = 2;
+
+    public static final int POS_TRANSCRIPTION = 2;
+    private static final int NUM_CONTENT_FRAGMENTS = 3;
 
     PlaybackSpeedIndicatorView butPlaybackSpeed;
     TextView txtvPlaybackSpeed;
@@ -102,6 +116,19 @@ public class AudioPlayerFragment extends Fragment implements
     private boolean seekedToChapterStart = false;
     private int currentChapterIndex = -1;
     private int duration;
+
+
+    private LinearLayout layoutFragments2Review;
+    private ImageView butMarkFragment2Review;
+//    private HashSet<Integer> fragments2Review;
+
+    GradientDrawable bg2Review = null;
+    GradientDrawable bgNotReview = null;
+
+    private int currentAudioFragment = -1;
+    private long currentMediaId = -1;
+
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -159,8 +186,52 @@ public class AudioPlayerFragment extends Fragment implements
             }
         });
 
+
         return root;
     }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        layoutFragments2Review = view.findViewById(R.id.layoutFragments2Review);
+        butMarkFragment2Review = view.findViewById(R.id.butMarkFragment2Review);
+
+        butMarkFragment2Review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if(controller == null || fragments2Review == null){
+//                    Log.d(TAG, "markFragment2ReviewBtn clicked while controller or fragments2Review is null");
+//                    return;
+//                }
+                if(controller == null || controller.getStatus() != PlayerStatus.PLAYING){
+                    Log.d(TAG, "markFragment2ReviewBtn clicked while controller is null or status is not playing");
+                    return;
+                }
+//                renewFragments2Review(currentAudioFragment, !fragments2Review.contains(currentAudioFragment));
+//                butMarkFragment2Review.setImageResource(fragments2Review.contains(currentAudioFragment)?R.drawable.ic_unmark_review_later: R.drawable.ic_mark_review_later);
+                EventBus.getDefault().post(new MarkFragment2ReviewEvent(controller.getPosition()));
+                Log.d(TAG, "markFragment2ReviewBtn clicked while current controller position " + controller.getPosition());
+            }
+        });
+
+        bg2Review = new GradientDrawable();
+        bg2Review.setColor(Color.YELLOW); // Change this color to suit your needs
+        bg2Review.setStroke(2, Color.YELLOW); // Change this color to suit your needs
+
+        bgNotReview = new GradientDrawable();
+        bgNotReview.setColor(Color.WHITE); // Change this color to suit your needs
+        bgNotReview.setStroke(2, Color.BLACK); // Change this color to suit your needs
+    }
+
+
+    private void refreshFragments2ReviewLayout() {
+//        FeedMedia media = (FeedMedia) controller.getMedia();
+//        fragments2Review = TranscriptionHelper.loadFragments2ReviewRecord(getContext(), media.getId());
+//        rebuildFragments2Review();
+    }
+
 
     private void setChapterDividers(Playable media) {
 
@@ -305,6 +376,8 @@ public class AudioPlayerFragment extends Fragment implements
         updatePlaybackSpeedButton(new SpeedChangedEvent(PlaybackSpeedUtils.getCurrentPlaybackSpeed(media)));
         setChapterDividers(media);
         setupOptionsMenu(media);
+//        EventBus.getDefault().post(new MediaChangedEvent());
+        refreshFragments2ReviewLayout();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -386,6 +459,23 @@ public class AudioPlayerFragment extends Fragment implements
             float progress = ((float) event.getPosition()) / event.getDuration();
             sbPosition.setProgress((int) (progress * sbPosition.getMax()));
         }
+
+//        boolean mediaChanged = false;
+        FeedMedia media = (FeedMedia)controller.getMedia();
+        int fragment = event.getPosition() / 180000;
+        if(currentAudioFragment != fragment ||currentMediaId != media.getId()){
+            currentAudioFragment = fragment;
+            if(currentMediaId != media.getId()){
+                currentMediaId = media.getId();
+//                mediaChanged = true;
+            }
+        }
+
+//        if(fragments2Review == null || mediaChanged){
+//            refreshFragments2ReviewLayout();
+//        }
+//        butMarkFragment2Review.setImageResource(fragments2Review.contains(currentAudioFragment)?R.drawable.ic_unmark_review_later: R.drawable.ic_mark_review_later);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -397,6 +487,38 @@ public class AudioPlayerFragment extends Fragment implements
     public void mediaPlayerError(PlayerErrorEvent event) {
         MediaPlayerErrorDialog.show(getActivity(), event);
     }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void media2Review(MarkFragment2ReviewEvent event) {
+//
+//        if(controller == null){
+//            return;
+//        }
+//
+//        Menu menu = toolbar.getMenu();
+//        FeedMedia media = (FeedMedia)controller.getMedia();
+//        FeedItem item = media.getItem();
+//        if(item.isTagged(FeedItem.TAG_FAVORITE)){
+//            Log.d(TAG, "Media2ReviewEvent item is already in favorites");
+//            if(!event.hasFragments2Review){
+//                Log.d(TAG, "Media2ReviewEvent user remove all fragment 2 review");
+//                menu.findItem(R.id.add_to_favorites_item).setVisible(false);
+//                menu.findItem(R.id.remove_from_favorites_item).setVisible(true);
+//                menu.performIdentifierAction(R.id.remove_from_favorites_item, 0);
+//                Log.d(TAG, "Media2ReviewEvent remove current item from favorites");
+//            }
+//        }else{
+//            Log.d(TAG, "Media2ReviewEvent item is not in favorites");
+//            if(event.hasFragments2Review){
+//                Log.d(TAG, "Media2ReviewEvent user add some fragment 2 review");
+//                menu.findItem(R.id.add_to_favorites_item).setVisible(true);
+//                menu.findItem(R.id.remove_from_favorites_item).setVisible(false);
+//                menu.performIdentifierAction(R.id.add_to_favorites_item, 0);
+//                Log.d(TAG, "Media2ReviewEvent add current item into favorites");
+//            }
+//        }
+//    }
+
+
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -539,6 +661,14 @@ public class AudioPlayerFragment extends Fragment implements
                 default:
                 case POS_DESCRIPTION:
                     return new ItemDescriptionFragment();
+                case POS_TRANSCRIPTION: {
+                    TranscriptionFragment f = new TranscriptionFragment();
+//                    Playable media = this.c.getMedia();
+//                    Bundle args = new Bundle();
+//                    args.putLong("feedMediaId", );
+                    return f;
+                }
+
             }
         }
 

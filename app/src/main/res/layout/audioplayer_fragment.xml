@@ -86,6 +86,15 @@
             android:layoutDirection="ltr"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/layoutFragments2Review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:visibility="gone"
+                android:orientation="horizontal"/>
+
             <de.danoeh.antennapod.view.ChapterSeekBar
                 android:id="@+id/sbPosition"
                 android:layout_width="match_parent"
@@ -95,6 +104,7 @@
                 android:clickable="true"
                 android:max="500"
                 tools:progress="100" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -115,6 +125,15 @@
                     android:text="@string/position_default_label"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="@dimen/text_size_micro" />
+
+                <ImageView
+                    android:id="@+id/butMarkFragment2Review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_transcript_nav_bookmarks"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
                 <de.danoeh.antennapod.view.NoRelayoutTextView
                     android:id="@+id/txtvLength"
@@ -274,6 +293,7 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_skip_48dp"
                     tools:srcCompat="@drawable/ic_skip_48dp" />
+
 
             </RelativeLayout>
 

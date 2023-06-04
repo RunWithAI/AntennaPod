@@ -5,9 +5,11 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.0"
         classpath 'org.codehaus.groovy:groovy-xml:3.0.9'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
+
     }
 }
 
@@ -70,3 +72,4 @@ task checkstyle(type: Checkstyle) {
     exclude("**/gen/**")
     exclude("**/generated/**")
 }
+

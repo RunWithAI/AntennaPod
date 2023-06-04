@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -37,6 +38,7 @@ import com.google.android.material.snackbar.Snackbar;
 import de.danoeh.antennapod.R;
 import de.danoeh.antennapod.core.preferences.ThemeSwitcher;
 import de.danoeh.antennapod.core.receiver.MediaButtonReceiver;
+import de.danoeh.antennapod.core.util.UpdateApp;
 import de.danoeh.antennapod.core.util.download.FeedUpdateManager;
 import de.danoeh.antennapod.dialog.RatingDialog;
 import de.danoeh.antennapod.event.EpisodeDownloadEvent;
@@ -72,6 +74,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The activity that is shown when the user launches the app.
@@ -97,6 +101,11 @@ public class MainActivity extends CastEnabledActivity {
     private RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
     private int lastTheme = 0;
     private Insets navigationBarInsets = Insets.NONE;
+
+    private Handler handler;
+    private ExecutorService executorService;
+    private UpdateApp updateApp;
+
 
     @NonNull
     public static Intent getIntentToOpenFeed(@NonNull Context context, long feedId) {
@@ -213,6 +222,12 @@ public class MainActivity extends CastEnabledActivity {
                     DownloadServiceInterface.get().setCurrentDownloads(updatedEpisodes);
                     EventBus.getDefault().postSticky(new EpisodeDownloadEvent(updatedEpisodes));
                 });
+
+//        handler = new Handler();
+//        executorService = Executors.newSingleThreadExecutor();
+        updateApp = new UpdateApp(this);
+        updateApp.checkUpdate();
+
     }
 
     @Override
@@ -748,5 +763,11 @@ public class MainActivity extends CastEnabledActivity {
             return true;
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAppUpdateAvailable(UpdateApp.AppUpdateAvailableEvent event) {
+//        updateApp.showUpdateDialog(event.apkUrl, event.updateSummary);
     }
 }
