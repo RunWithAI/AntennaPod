@@ -45,5 +45,5 @@ libs
 gradle.properties
 *.keystore
 *.p12
-keystore
+app/keystore
 flagchatadapter/
