@@ -1,4 +1,4 @@
-# PodTrans (AntennaPod with Transcript)
+# TransPod (AntennaPod with Transcript)
 
 This repository is forked from [AntennaPod](https://github.com/AntennaPod/AntennaPod). 
 
